@@ -4,14 +4,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-b border-primary/20 px-5 md:px-10 flex items-center justify-between h-[72px]">
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded bg-primary flex items-center justify-center text-primary-foreground font-extrabold text-sm tracking-tight">
-            EM
-          </div>
-          <span className="text-[14px] font-bold tracking-[0.08em] uppercase text-foreground">
-            Estes Media
-          </span>
-        </div>
+        <img src={logo} alt="Estes Media" className="h-10" />
       </div>
       <a
         href="#cta"

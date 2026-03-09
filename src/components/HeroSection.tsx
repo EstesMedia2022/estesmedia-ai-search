@@ -76,7 +76,7 @@ const HeroSection = () => {
           <p className="text-[26px] font-bold tracking-[0.15em] uppercase text-foreground/50">Show Up Here:</p>
           <div className="flex items-center gap-16 flex-wrap justify-center">
             <img src={chatgptLogo} alt="ChatGPT" className="h-14 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-            <img src={geminiLogo} alt="Google Gemini" className="h-14 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            <img src={geminiLogo} alt="Google Gemini" className="h-[73px] brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
             <img src={claudeLogo} alt="Claude" className="h-14 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
           </div>
         </div>

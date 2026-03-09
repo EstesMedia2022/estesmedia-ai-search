@@ -1,7 +1,7 @@
 import award1 from "@/assets/award-1.png";
 import award2 from "@/assets/award-2.png";
-import award3 from "@/assets/award-3.png";
-import award4 from "@/assets/award-4.png";
+import award3 from "@/assets/award-3.svg";
+import award4 from "@/assets/award-4.svg";
 
 const TrustStrip = () => {
   return (

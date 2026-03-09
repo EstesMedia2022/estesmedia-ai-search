@@ -1,11 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import ctaMascot from "@/assets/cta-mascot.png";
 
+const getUtmParams = () => {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    referer_url: document.referrer || "",
+    utm_source: params.get("utm_source") || "",
+    utm_medium: params.get("utm_medium") || "",
+    utm_id: params.get("utm_id") || "",
+    utm_campaign: params.get("utm_campaign") || "",
+    utm_term: params.get("utm_term") || "",
+    utm_content: params.get("utm_content") || "",
+    utm_keyword: params.get("utm_keyword") || "",
+    utm_matchtype: params.get("utm_matchtype") || "",
+  };
+};
+
 const CtaSection = () => {
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "" });
+  const [hiddenFields, setHiddenFields] = useState(getUtmParams);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    setHiddenFields(getUtmParams());
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +43,7 @@ const CtaSection = () => {
           company: form.company.trim(),
           email: form.email.trim(),
           phone: form.phone.trim(),
+          ...hiddenFields,
         },
       });
 
@@ -53,8 +74,20 @@ const CtaSection = () => {
           Get a free AI Visibility Audit. We'll show you exactly where your company stands in ChatGPT, Perplexity, and Google AI — and what it's costing you in missed bids.
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-[440px] mx-auto mb-6">
+          {/* Hidden UTM fields */}
+          <input type="hidden" name="referer_url" value={hiddenFields.referer_url} />
+          <input type="hidden" name="utm_source" value={hiddenFields.utm_source} />
+          <input type="hidden" name="utm_medium" value={hiddenFields.utm_medium} />
+          <input type="hidden" name="utm_id" value={hiddenFields.utm_id} />
+          <input type="hidden" name="utm_campaign" value={hiddenFields.utm_campaign} />
+          <input type="hidden" name="utm_term" value={hiddenFields.utm_term} />
+          <input type="hidden" name="utm_content" value={hiddenFields.utm_content} />
+          <input type="hidden" name="utm_keyword" value={hiddenFields.utm_keyword} />
+          <input type="hidden" name="utm_matchtype" value={hiddenFields.utm_matchtype} />
+
           <input
             type="text"
+            name="name"
             placeholder="Your Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -62,6 +95,7 @@ const CtaSection = () => {
           />
           <input
             type="text"
+            name="company"
             placeholder="Company Name"
             value={form.company}
             onChange={(e) => setForm({ ...form, company: e.target.value })}
@@ -69,6 +103,7 @@ const CtaSection = () => {
           />
           <input
             type="email"
+            name="email"
             placeholder="Work Email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -76,6 +111,7 @@ const CtaSection = () => {
           />
           <input
             type="tel"
+            name="phone"
             placeholder="Phone Number"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}

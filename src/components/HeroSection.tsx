@@ -1,3 +1,7 @@
+import claudeLogo from "@/assets/claude-logo.png";
+import chatgptLogo from "@/assets/chatgpt-logo.png";
+import geminiLogo from "@/assets/gemini-logo.png";
+
 const HeroSection = () => {
   return (
     <section className="min-h-screen flex items-center relative overflow-hidden pt-[120px] pb-20 px-5 md:px-10 bg-gradient-to-br from-background via-[#0a1520] to-background bg-grid bg-radial-glow">

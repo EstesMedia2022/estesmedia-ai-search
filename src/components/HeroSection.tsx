@@ -70,6 +70,16 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+
+        {/* Show Up Here logos - spans full width below both columns */}
+        <div className="lg:col-span-2 flex flex-col items-center gap-4 mt-4">
+          <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-foreground/50">Show Up Here:</p>
+          <div className="flex items-center gap-10 flex-wrap justify-center">
+            <img src={chatgptLogo} alt="ChatGPT" className="h-8 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            <img src={geminiLogo} alt="Google Gemini" className="h-8 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            <img src={claudeLogo} alt="Claude" className="h-7 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+          </div>
+        </div>
       </div>
     </section>
   );

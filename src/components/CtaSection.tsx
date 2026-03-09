@@ -9,7 +9,7 @@ const CtaSection = () => {
       <img
         src={ctaMascot}
         alt="Mascot"
-        className="absolute right-[5%] bottom-0 h-[300px] w-auto opacity-90 pointer-events-none drop-shadow-[0_0_40px_rgba(25,149,205,0.3)] hidden lg:block"
+        className="absolute right-[5%] bottom-0 h-[300px] w-auto opacity-90 pointer-events-none drop-shadow-[0_0_40px_rgba(25,149,205,0.3)] hidden lg:block mix-blend-lighten"
       />
       <div className="max-w-[640px] mx-auto relative z-10">
         <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">Get Started Today</p>

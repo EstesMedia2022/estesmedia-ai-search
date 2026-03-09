@@ -27,12 +27,6 @@ const HeroSection = () => {
             >
               Get My Free AI Visibility Audit
             </a>
-            <a
-              href="#results"
-              className="border border-foreground/30 text-foreground px-8 py-4 rounded text-[14px] font-bold tracking-[0.06em] uppercase hover:border-primary hover:text-primary transition-all inline-block"
-            >
-              See Client Results
-            </a>
           </div>
         </div>
 

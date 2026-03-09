@@ -1,3 +1,7 @@
+import claudeLogo from "@/assets/claude-logo.png";
+import chatgptLogo from "@/assets/chatgpt-logo.png";
+import geminiLogo from "@/assets/gemini-logo.png";
+
 const HeroSection = () => {
   return (
     <section className="min-h-screen flex items-center relative overflow-hidden pt-[120px] pb-20 px-5 md:px-10 bg-gradient-to-br from-background via-[#0a1520] to-background bg-grid bg-radial-glow">
@@ -64,6 +68,16 @@ const HeroSection = () => {
                 <span className="inline-block w-0.5 h-3.5 bg-primary animate-blink align-middle ml-0.5" />
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* Show Up Here logos - spans full width below both columns */}
+        <div className="lg:col-span-2 flex flex-col items-center gap-4 mt-4">
+          <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-foreground/50">Show Up Here:</p>
+          <div className="flex items-center gap-10 flex-wrap justify-center">
+            <img src={chatgptLogo} alt="ChatGPT" className="h-8 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            <img src={geminiLogo} alt="Google Gemini" className="h-8 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            <img src={claudeLogo} alt="Claude" className="h-7 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ctaMascot from "@/assets/cta-mascot.jpg";
+import ctaMascot from "@/assets/cta-mascot.png";
 
 const CtaSection = () => {
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "" });

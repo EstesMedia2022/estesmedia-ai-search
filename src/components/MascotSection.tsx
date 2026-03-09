@@ -14,7 +14,7 @@ const MascotSection = () => {
       <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
         {features.map((f, i) => (
           <div key={i} className="text-center px-5">
-            <img src={f.img} alt={f.title} className="h-[180px] w-auto mx-auto mb-5 drop-shadow-[0_8px_24px_rgba(0,0,0,0.4)]" />
+            <img src={f.img} alt={f.title} className="h-[180px] w-auto mx-auto mb-5 drop-shadow-[0_8px_24px_rgba(0,0,0,0.4)] mix-blend-lighten" />
             <h3 className="text-[16px] font-extrabold mb-2 text-primary">{f.title}</h3>
             <p className="text-[13px] text-foreground/65 leading-[1.7]">{f.desc}</p>
           </div>

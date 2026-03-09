@@ -67,9 +67,14 @@ Deno.serve(async (req) => {
     }
 
     // Forward to webhook
+    const originUrl = req.headers.get('origin') || 'https://tinker-edit-build.lovable.app';
     await fetch(WEBHOOK_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Origin': originUrl,
+        'User-Agent': `EstesMediaBot/1.0 (${originUrl})`,
+      },
       body: JSON.stringify(data),
     });
 

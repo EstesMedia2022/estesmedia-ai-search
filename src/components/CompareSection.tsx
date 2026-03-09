@@ -1,7 +1,7 @@
 const rows = [
   { feature: "Construction-specific expertise", us: true, them: [true, false, false] },
   { feature: "AEO / GEO (AI search optimization)", us: true, them: [false, false, false] },
-  { feature: "Commercial contractor focus", us: true, them: [false, "Residential", false] },
+  { feature: "Commercial contractor focus", us: true, them: ["Residential", false, false] },
   { feature: "Proven $1M+ revenue results", us: true, them: ["—", "—", "—"] },
   { feature: "No lock-in + results guarantee", us: true, them: [false, false, false] },
   { feature: "In-house team (no offshore)", us: true, them: [true, false, false] },

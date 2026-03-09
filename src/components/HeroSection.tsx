@@ -1,6 +1,6 @@
 const HeroSection = () => {
   return (
-    <section className="min-h-screen flex items-center relative overflow-hidden pt-[120px] pb-20 px-5 md:px-10 bg-gradient-to-br from-background via-[#0a1520] to-background">
+    <section className="min-h-screen flex items-center relative overflow-hidden pt-[120px] pb-20 px-5 md:px-10 bg-gradient-to-br from-background via-[#0a1520] to-background bg-grid bg-radial-glow">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[60px] max-w-[1200px] mx-auto w-full items-center">
         {/* Left */}
         <div>

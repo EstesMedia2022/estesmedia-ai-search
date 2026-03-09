@@ -9,7 +9,7 @@ const pains = [
 
 const ProblemSection = () => {
   return (
-    <section className="py-20 px-5 md:px-10 max-w-[1200px] mx-auto">
+    <section className="py-20 px-5 md:px-10 max-w-[1200px] mx-auto relative bg-dots">
       <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">The Problem</p>
       <h2 className="font-serif text-[clamp(30px,3.5vw,46px)] leading-[1.2] mb-4">
         Your Marketing Agency Doesn't Understand <em className="italic text-primary">Construction</em>

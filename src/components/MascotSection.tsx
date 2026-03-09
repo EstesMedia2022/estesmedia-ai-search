@@ -10,7 +10,7 @@ const features = [
 
 const MascotSection = () => {
   return (
-    <section className="py-16 px-5 md:px-10 bg-gradient-to-br from-primary/[0.08] via-transparent to-accent/[0.05]">
+    <section className="py-16 px-5 md:px-10 bg-gradient-to-br from-primary/[0.08] via-transparent to-accent/[0.05] bg-noise">
       <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
         {features.map((f, i) => (
           <div key={i} className="text-center px-5">

@@ -5,7 +5,7 @@ const CtaSection = () => {
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "" });
 
   return (
-    <section id="cta" className="py-24 px-5 md:px-10 bg-gradient-to-br from-primary/[0.12] to-background relative overflow-hidden text-center">
+    <section id="cta" className="py-24 px-5 md:px-10 bg-gradient-to-br from-primary/[0.12] to-background relative overflow-hidden text-center bg-grid bg-radial-glow">
       <img
         src={ctaMascot}
         alt="Mascot"

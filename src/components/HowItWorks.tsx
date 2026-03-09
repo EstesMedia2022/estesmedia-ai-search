@@ -9,7 +9,7 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-20 px-5 md:px-10 bg-foreground/[0.015]">
+    <section className="py-20 px-5 md:px-10 bg-foreground/[0.015] bg-grid bg-radial-glow">
       <div className="max-w-[1100px] mx-auto">
         <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">The System</p>
         <h2 className="font-serif text-[clamp(30px,3.5vw,46px)] leading-[1.2]">

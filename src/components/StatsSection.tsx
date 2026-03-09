@@ -7,7 +7,7 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="py-20 px-5 md:px-10 bg-gradient-to-b from-transparent via-primary/5 to-transparent">
+    <section className="py-20 px-5 md:px-10 bg-gradient-to-b from-transparent via-primary/5 to-transparent bg-noise">
       <div className="max-w-[1100px] mx-auto">
         <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">
           The AI Search Shift Is Already Here

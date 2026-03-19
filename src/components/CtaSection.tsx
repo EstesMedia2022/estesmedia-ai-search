@@ -59,7 +59,7 @@ const CtaSection = () => {
   };
 
   return (
-    <section id="cta" className="py-24 px-5 bg-gradient-to-br from-primary/[0.12] to-background relative overflow-hidden text-center bg-grid bg-radial-glow md:px-[131px]">
+    <section id="cta" className="py-24 px-5 bg-gradient-to-br from-primary/[0.12] to-background relative overflow-hidden bg-grid bg-radial-glow mx-0 text-center md:px-[184px]">
       <img
         src={ctaMascot}
         alt="Mascot"

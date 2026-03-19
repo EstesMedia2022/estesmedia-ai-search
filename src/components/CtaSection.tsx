@@ -14,7 +14,7 @@ const getUtmParams = () => {
     utm_term: params.get("utm_term") || "",
     utm_content: params.get("utm_content") || "",
     utm_keyword: params.get("utm_keyword") || "",
-    utm_matchtype: params.get("utm_matchtype") || "",
+    utm_matchtype: params.get("utm_matchtype") || ""
   };
 };
 
@@ -43,8 +43,8 @@ const CtaSection = () => {
           company: form.company.trim(),
           email: form.email.trim(),
           phone: form.phone.trim(),
-          ...hiddenFields,
-        },
+          ...hiddenFields
+        }
       });
 
       if (error) throw error;
@@ -59,12 +59,12 @@ const CtaSection = () => {
   };
 
   return (
-    <section id="cta" className="py-24 px-5 md:px-10 bg-gradient-to-br from-primary/[0.12] to-background relative overflow-hidden text-center bg-grid bg-radial-glow">
+    <section id="cta" className="py-24 px-5 bg-gradient-to-br from-primary/[0.12] to-background relative overflow-hidden text-center bg-grid bg-radial-glow md:px-[131px]">
       <img
         src={ctaMascot}
         alt="Mascot"
-        className="absolute right-[5%] bottom-0 h-[300px] w-auto opacity-90 pointer-events-none drop-shadow-[0_0_40px_rgba(25,149,205,0.3)] hidden lg:block"
-      />
+        className="absolute right-[5%] bottom-0 h-[300px] w-auto opacity-90 pointer-events-none drop-shadow-[0_0_40px_rgba(25,149,205,0.3)] hidden lg:block" />
+      
       <div className="max-w-[640px] mx-auto relative z-10">
         <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">Get Started Today</p>
         <h2 className="font-serif text-[clamp(32px,4vw,52px)] leading-[1.2] mb-5">
@@ -91,44 +91,44 @@ const CtaSection = () => {
             placeholder="Your Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full"
-          />
+            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
+          
           <input
             type="text"
             name="company"
             placeholder="Company Name"
             value={form.company}
             onChange={(e) => setForm({ ...form, company: e.target.value })}
-            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full"
-          />
+            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
+          
           <input
             type="email"
             name="email"
             placeholder="Work Email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full"
-          />
+            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
+          
           <input
             type="tel"
             name="phone"
             placeholder="Phone Number"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full"
-          />
+            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
+          
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-secondary text-secondary-foreground px-8 py-4 rounded text-[14px] font-extrabold tracking-[0.06em] uppercase hover:bg-secondary/85 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(230,105,2,0.4)] transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
+            className="bg-secondary text-secondary-foreground px-8 py-4 rounded text-[14px] font-extrabold tracking-[0.06em] uppercase hover:bg-secondary/85 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(230,105,2,0.4)] transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed">
+            
             {isSubmitting ? "Submitting..." : "Get My Free AI Visibility Audit →"}
           </button>
         </form>
         <p className="text-[12px] text-foreground/40">No commitment. No BS. Just clarity on where you stand.</p>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default CtaSection;

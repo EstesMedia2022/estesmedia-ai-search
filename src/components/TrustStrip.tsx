@@ -1,5 +1,5 @@
-import award1 from "@/assets/award-1.png";
-import award2 from "@/assets/award-2.png";
+import award1 from "@/assets/award-1.webp";
+import award2 from "@/assets/award-2.webp";
 import award3 from "@/assets/award-3.svg";
 import award4 from "@/assets/award-4.svg";
 
@@ -11,10 +11,10 @@ const TrustStrip = () => {
           Recognized By
         </span>
         <div className="flex items-center gap-6 flex-wrap">
-          <img src={award1} alt="Award badge" className="h-14 w-auto opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" />
-          <img src={award2} alt="Award badge" className="h-14 w-auto opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" />
-          <img src={award3} alt="Award badge" className="h-14 w-auto opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" />
-          <img src={award4} alt="Award badge" className="h-14 w-auto opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" />
+          <img src={award1} alt="B2B Excellence Award" className="h-14 w-auto opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" />
+          <img src={award2} alt="Top Marketing Agency Badge" className="h-14 w-auto opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" />
+          <img src={award3} alt="UpCity Excellence Badge" className="h-14 w-auto opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" />
+          <img src={award4} alt="SEMrush Certified Partner" className="h-14 w-auto opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" />
         </div>
         <div className="flex flex-col items-center gap-1">
           <span className="text-[#FFB800] text-lg tracking-[2px]">★★★★★</span>

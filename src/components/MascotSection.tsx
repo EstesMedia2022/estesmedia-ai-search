@@ -1,6 +1,6 @@
-import mascot1 from "@/assets/mascot-1.png";
-import mascot2 from "@/assets/mascot-2.png";
-import mascot3 from "@/assets/mascot-3.png";
+import mascot1 from "@/assets/mascot-1.webp";
+import mascot2 from "@/assets/mascot-2.webp";
+import mascot3 from "@/assets/mascot-3.webp";
 
 const features = [
   { img: mascot1, title: "Built Around Revenue", desc: "Every strategy we build is tied to bids, inbound calls, and signed contracts — not vanity metrics or pretty dashboards." },

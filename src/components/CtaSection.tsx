@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import ctaMascot from "@/assets/cta-mascot.png";
+import ctaMascot from "@/assets/cta-mascot.webp";
 
 const getUtmParams = () => {
   const params = new URLSearchParams(window.location.search);
@@ -86,6 +86,9 @@ const CtaSection = () => {
           <input type="hidden" name="utm_matchtype" value={hiddenFields.utm_matchtype} />
 
           <input
+            id="name"
+            autoComplete="name"
+            aria-label="Your Name"
             type="text"
             name="name"
             placeholder="Your Name"
@@ -94,6 +97,9 @@ const CtaSection = () => {
             className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
           
           <input
+            id="company"
+            autoComplete="organization"
+            aria-label="Company Name"
             type="text"
             name="company"
             placeholder="Company Name"
@@ -102,6 +108,9 @@ const CtaSection = () => {
             className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
           
           <input
+            id="email"
+            autoComplete="email"
+            aria-label="Work Email"
             type="email"
             name="email"
             placeholder="Work Email"
@@ -110,6 +119,9 @@ const CtaSection = () => {
             className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
           
           <input
+            id="phone"
+            autoComplete="tel"
+            aria-label="Phone Number"
             type="tel"
             name="phone"
             placeholder="Phone Number"

@@ -1,5 +1,5 @@
-import maloneImg from "@/assets/malone-roofing.jpg";
-import totalImg from "@/assets/total-wrecking.jpg";
+import maloneImg from "@/assets/malone-roofing.webp";
+import totalImg from "@/assets/total-wrecking.webp";
 
 const results = [
   {

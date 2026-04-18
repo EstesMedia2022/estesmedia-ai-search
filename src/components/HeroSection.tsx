@@ -1,6 +1,6 @@
-import claudeLogo from "@/assets/claude-logo.png";
-import chatgptLogo from "@/assets/chatgpt-logo.png";
-import geminiLogo from "@/assets/gemini-logo.png";
+import claudeLogo from "@/assets/claude-logo.webp";
+import chatgptLogo from "@/assets/chatgpt-logo.webp";
+import geminiLogo from "@/assets/gemini-logo.webp";
 
 const HeroSection = () => {
   return (
@@ -69,9 +69,9 @@ const HeroSection = () => {
         <div className="lg:col-span-2 flex flex-col items-center gap-8 mt-8">
           <p className="text-[26px] font-bold tracking-[0.15em] uppercase text-foreground/50">Show Up Here:</p>
           <div className="flex items-center gap-16 flex-wrap justify-center">
-            <img src={chatgptLogo} alt="ChatGPT" className="h-14 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-            <img src={geminiLogo} alt="Google Gemini" className="h-[73px] brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-            <img src={claudeLogo} alt="Claude" className="h-[47px] brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            <img fetchPriority="high" src={chatgptLogo} alt="ChatGPT" className="h-14 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            <img fetchPriority="high" src={geminiLogo} alt="Google Gemini" className="h-[73px] brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+            <img fetchPriority="high" src={claudeLogo} alt="Claude" className="h-[47px] brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
           </div>
         </div>
       </div>

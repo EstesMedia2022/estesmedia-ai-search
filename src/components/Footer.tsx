@@ -1,4 +1,4 @@
-import logo from "@/assets/estes-media-logo.png";
+import logo from "@/assets/estes-media-logo.webp";
 
 const Footer = () => {
   return (

@@ -17,18 +17,6 @@ export const useMarketingScripts = () => {
       })(window,document,'script','dataLayer','GTM-NSRBT4Z');`;
       document.head.appendChild(gtmScript);
 
-      // Facebook Pixel
-      const fbScript = document.createElement("script");
-      fbScript.innerHTML = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-      document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '280824040008191');
-      fbq('set','agent','tmgoogletagmanager', '280824040008191');
-      fbq('track', "PageView");`;
-      document.head.appendChild(fbScript);
-
       // Google Ads
       const gAdsScript = document.createElement("script");
       gAdsScript.async = true;
@@ -41,15 +29,6 @@ export const useMarketingScripts = () => {
       gtag('js', new Date());
       gtag('config', 'AW-703463633');`;
       document.head.appendChild(gAdsInit);
-
-      // HubSpot
-      const hsScript = document.createElement("script");
-      hsScript.type = "text/javascript";
-      hsScript.id = "hs-script-loader";
-      hsScript.async = true;
-      hsScript.defer = true;
-      hsScript.src = "//js.hs-scripts.com/5953448.js";
-      document.body.appendChild(hsScript);
 
       // Cleanup event listeners
       window.removeEventListener("scroll", loadScripts);

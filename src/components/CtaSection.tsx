@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import ctaMascot from "@/assets/cta-mascot.webp";
@@ -19,6 +20,7 @@ const getUtmParams = () => {
 };
 
 const CtaSection = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "" });
   const [hiddenFields, setHiddenFields] = useState(getUtmParams);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,8 +51,8 @@ const CtaSection = () => {
 
       if (error) throw error;
 
-      toast.success("Thanks! We'll be in touch soon.");
       setForm({ name: "", company: "", email: "", phone: "" });
+      navigate("/thank-you");
     } catch (err) {
       toast.error("Something went wrong. Please try again.");
     } finally {

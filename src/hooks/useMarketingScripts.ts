@@ -40,7 +40,7 @@ export const useMarketingScripts = () => {
     window.addEventListener("mousemove", loadScripts, { once: true, passive: true });
     window.addEventListener("touchstart", loadScripts, { once: true, passive: true });
 
-    const timeoutId = setTimeout(loadScripts, 3500);
+    const timeoutId = setTimeout(loadScripts, 6000);
 
     return () => {
       window.removeEventListener("scroll", loadScripts);

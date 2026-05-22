@@ -68,7 +68,7 @@ const CtaSection = () => {
         className="absolute right-[5%] bottom-0 h-[300px] w-auto opacity-90 pointer-events-none drop-shadow-[0_0_40px_rgba(25,149,205,0.3)] hidden lg:block" />
       
       <div className="max-w-[640px] mx-auto relative z-10">
-        <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">Get Started Today</p>
+        <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">Request Consultation</p>
         <h2 className="font-serif text-[clamp(32px,4vw,52px)] leading-[1.2] mb-5">
           Find Out If AI Search Is Costing You <em className="italic text-primary">Leads Right Now</em>
         </h2>
@@ -136,7 +136,7 @@ const CtaSection = () => {
             disabled={isSubmitting}
             className="bg-secondary text-secondary-foreground px-8 py-4 rounded text-[14px] font-extrabold tracking-[0.06em] uppercase hover:bg-secondary/85 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(230,105,2,0.4)] transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed">
             
-            {isSubmitting ? "Submitting..." : "Get My Free AI Visibility Audit →"}
+            {isSubmitting ? "Submitting..." : "Request Consultation →"}
           </button>
         </form>
         <p className="text-[12px] text-foreground/40">No commitment. No BS. Just clarity on where you stand.</p>

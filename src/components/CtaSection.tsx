@@ -50,12 +50,48 @@ const CtaSection = () => {
       if (error) throw error;
 
       setForm({ name: "", company: "", email: "", phone: "" });
-      // Full page load (not SPA navigate) so GTM re-initializes and the
-      // "Thank You page" PAGEVIEW trigger fires its conversion tags.
-      window.location.assign("/thank-you");
+
+      // Fire the conversion at the moment of submit — the tracking scripts are
+      // already loaded (hardcoded in index.html), so this path is reliable and
+      // does not depend on the visitor lingering on /thank-you for the pageview
+      // trigger to fire. The /thank-you PAGEVIEW trigger still runs as a backup.
+      const w = window as unknown as {
+        dataLayer?: Record<string, unknown>[];
+        fbq?: (...args: unknown[]) => void;
+      };
+
+      // Meta (Facebook) standard Lead event.
+      try {
+        w.fbq?.("track", "Lead");
+      } catch {
+        /* pixel not ready — noscript/pageview fallback still applies */
+      }
+
+      // Redirect to the thank-you page, but only after GTM has had a chance to
+      // fire the tags bound to the "lead" event (eventCallback), with a hard
+      // fallback in case GTM is unavailable or slow.
+      let navigated = false;
+      const goToThankYou = () => {
+        if (navigated) return;
+        navigated = true;
+        window.location.assign("/thank-you");
+      };
+
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: "lead",
+        form_name: "ai_visibility_audit",
+        ...hiddenFields,
+        eventCallback: goToThankYou,
+        eventTimeout: 1500,
+      });
+
+      // Fallback: navigate even if GTM never invokes the callback.
+      window.setTimeout(goToThankYou, 1600);
+      // Keep the button disabled through the redirect wait (no finally reset)
+      // so the form can't be submitted twice while the conversion fires.
     } catch (err) {
       toast.error("Something went wrong. Please try again.");
-    } finally {
       setIsSubmitting(false);
     }
   };

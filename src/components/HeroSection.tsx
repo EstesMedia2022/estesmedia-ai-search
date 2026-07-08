@@ -25,7 +25,7 @@ const HeroSection = () => {
               href="#cta"
               className="bg-secondary text-secondary-foreground px-8 py-4 rounded text-[14px] font-extrabold tracking-[0.06em] uppercase hover:bg-secondary/85 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(230,105,2,0.4)] transition-all inline-block"
             >
-              Get My Free AI Visibility Audit
+              Request Consultation
             </a>
           </div>
         </div>

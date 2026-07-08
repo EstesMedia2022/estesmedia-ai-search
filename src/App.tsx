@@ -6,13 +6,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ThankYou from "./pages/ThankYou.tsx";
-import { useMarketingScripts } from "./hooks/useMarketingScripts";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  useMarketingScripts();
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>

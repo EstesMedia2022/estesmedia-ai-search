@@ -50,12 +50,48 @@ const CtaSection = () => {
       if (error) throw error;
 
       setForm({ name: "", company: "", email: "", phone: "" });
-      // Full page load (not SPA navigate) so GTM re-initializes and the
-      // "Thank You page" PAGEVIEW trigger fires its conversion tags.
-      window.location.assign("/thank-you");
+
+      // Fire the conversion at the moment of submit — the tracking scripts are
+      // already loaded (hardcoded in index.html), so this path is reliable and
+      // does not depend on the visitor lingering on /thank-you for the pageview
+      // trigger to fire. The /thank-you PAGEVIEW trigger still runs as a backup.
+      const w = window as unknown as {
+        dataLayer?: Record<string, unknown>[];
+        fbq?: (...args: unknown[]) => void;
+      };
+
+      // Meta (Facebook) standard Lead event.
+      try {
+        w.fbq?.("track", "Lead");
+      } catch {
+        /* pixel not ready — noscript/pageview fallback still applies */
+      }
+
+      // Redirect to the thank-you page, but only after GTM has had a chance to
+      // fire the tags bound to the "lead" event (eventCallback), with a hard
+      // fallback in case GTM is unavailable or slow.
+      let navigated = false;
+      const goToThankYou = () => {
+        if (navigated) return;
+        navigated = true;
+        window.location.assign("/thank-you");
+      };
+
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: "lead",
+        form_name: "ai_visibility_audit",
+        ...hiddenFields,
+        eventCallback: goToThankYou,
+        eventTimeout: 1500,
+      });
+
+      // Fallback: navigate even if GTM never invokes the callback.
+      window.setTimeout(goToThankYou, 1600);
+      // Keep the button disabled through the redirect wait (no finally reset)
+      // so the form can't be submitted twice while the conversion fires.
     } catch (err) {
       toast.error("Something went wrong. Please try again.");
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -68,7 +104,7 @@ const CtaSection = () => {
         className="absolute right-[5%] bottom-0 h-[300px] w-auto opacity-90 pointer-events-none drop-shadow-[0_0_40px_rgba(25,149,205,0.3)] hidden lg:block" />
       
       <div className="max-w-[640px] mx-auto relative z-10">
-        <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">Get Started Today</p>
+        <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">Request Consultation</p>
         <h2 className="font-serif text-[clamp(32px,4vw,52px)] leading-[1.2] mb-5">
           Find Out If AI Search Is Costing You <em className="italic text-primary">Leads Right Now</em>
         </h2>
@@ -136,7 +172,7 @@ const CtaSection = () => {
             disabled={isSubmitting}
             className="bg-secondary text-secondary-foreground px-8 py-4 rounded text-[14px] font-extrabold tracking-[0.06em] uppercase hover:bg-secondary/85 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(230,105,2,0.4)] transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed">
             
-            {isSubmitting ? "Submitting..." : "Get My Free AI Visibility Audit →"}
+            {isSubmitting ? "Submitting..." : "Request Consultation →"}
           </button>
         </form>
         <p className="text-[12px] text-foreground/40">No commitment. No BS. Just clarity on where you stand.</p>

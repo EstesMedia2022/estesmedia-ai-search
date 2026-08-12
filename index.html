@@ -3,36 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estes Media - AI Visibility Audit</title>
-    <meta name="description" content="Get a free AI Visibility Audit. Find out if AI Search is costing you leads right now.">
-    <link rel="icon" type="image/webp" href="/src/assets/estes-media-logo.webp" />
 
-    <!-- Facebook Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    <title>AI Visibility Audit for Commercial Contractors | Estes Media</title>
+    <meta
+      name="description"
+      content="Free AI Visibility Audit. See exactly where your company shows up in ChatGPT, Perplexity, and Google AI — and what being invisible is costing you in bids."
+    />
+    <meta name="theme-color" content="#101317" />
+    <meta name="color-scheme" content="dark" />
 
-      fbq('init', '280824040008191');
-      fbq('set','agent','tmgoogletagmanager', '280824040008191');
-      fbq('track', "PageView");
-    </script>
-    <!-- End Facebook Pixel Code -->
+    <!-- Social preview. og:image is relative; make it absolute once the
+         production domain is locked in, so scrapers that don't resolve
+         relative paths still pick it up. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Estes Media" />
+    <meta property="og:title" content="Your Competitors Are Already Showing Up in AI Search. You're Not." />
+    <meta
+      property="og:description"
+      content="60% of B2B buyers use AI to find contractors before they ever call. Get a free AI Visibility Audit from Estes Media."
+    />
+    <meta property="og:image" content="/og-image.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Your Competitors Are Already Showing Up in AI Search. You're Not." />
+    <meta
+      name="twitter:description"
+      content="60% of B2B buyers use AI to find contractors before they ever call. Get a free AI Visibility Audit from Estes Media."
+    />
+    <meta name="twitter:image" content="/og-image.webp" />
+
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Self-hosted, latin-only. Preload the two faces that render the hero so
+         they are in flight before the stylesheet has even parsed. -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/dm-serif-display-latin-400-normal.woff2"
+      crossorigin
+    />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-latin-400-normal.woff2" crossorigin />
+
+    <!-- Third-party tags are injected after first paint (see
+         useMarketingScripts). Warming the connections here means the handshake
+         is already done when they fire, without blocking the critical path. -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://connect.facebook.net" />
+    <link rel="dns-prefetch" href="https://js.hs-scripts.com" />
   </head>
 
   <body>
-    <!-- Facebook Pixel <noscript> fallback (must live in <body>) -->
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=280824040008191&ev=PageView&noscript=1"
+    <!-- Meta Pixel <noscript> fallback (must live in <body>) -->
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        alt=""
+        src="https://www.facebook.com/tr?id=280824040008191&ev=PageView&noscript=1"
     /></noscript>
 
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-
-    <!-- Start of HubSpot Embed Code -->
-    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5953448.js"></script>
-    <!-- End of HubSpot Embed Code -->
   </body>
 </html>

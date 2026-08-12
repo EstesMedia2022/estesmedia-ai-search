@@ -7,7 +7,7 @@ const ThankYou = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <main className="flex-1 flex items-center relative overflow-hidden pt-[120px] pb-20 px-5 md:px-10 bg-gradient-to-br from-primary/[0.12] via-[#0a1520] to-background bg-grid bg-radial-glow">
+      <main className="flex-1 flex items-center relative overflow-hidden pt-[110px] pb-20 px-5 md:px-10 bg-gradient-to-br from-primary/[0.12] via-[#0a1520] to-background bg-grid bg-radial-glow">
         <div className="max-w-[720px] mx-auto w-full text-center relative z-10">
           <div className="inline-flex items-center gap-2 bg-primary/15 border border-primary/40 rounded-full px-4 py-1.5 text-[12px] font-bold tracking-[0.1em] uppercase text-primary mb-5">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse-dot" />
@@ -48,7 +48,12 @@ const ThankYou = () => {
 
         <img
           src={ctaMascot}
-          alt="Mascot"
+          alt=""
+          aria-hidden="true"
+          width={620}
+          height={600}
+          loading="lazy"
+          decoding="async"
           className="absolute right-[5%] bottom-0 h-[300px] w-auto opacity-90 pointer-events-none drop-shadow-[0_0_40px_rgba(25,149,205,0.3)] hidden lg:block"
         />
       </main>

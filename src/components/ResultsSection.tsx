@@ -39,7 +39,15 @@ const ResultsSection = () => {
             key={i}
             className="bg-foreground/[0.03] border border-foreground/[0.08] rounded-lg overflow-hidden transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
           >
-            <img src={r.img} alt={r.title} className="w-full h-[220px] object-cover object-top" />
+            <img
+              src={r.img}
+              alt={`${r.title} website`}
+              width={1080}
+              height={537}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-[220px] object-cover object-top"
+            />
             <div className="p-6">
               <span className="inline-block bg-primary/15 text-primary text-[10px] font-extrabold tracking-[0.12em] uppercase px-2.5 py-1 rounded-full mb-3">
                 {r.tag}

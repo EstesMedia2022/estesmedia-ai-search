@@ -1,148 +1,162 @@
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { useEffect, useRef, useState } from "react";
 import ctaMascot from "@/assets/cta-mascot.webp";
+import { getUtmParams, submitLead } from "@/lib/submitLead";
 
-const getUtmParams = () => {
-  const params = new URLSearchParams(window.location.search);
-  return {
-    referer_url: document.referrer || "",
-    utm_source: params.get("utm_source") || "",
-    utm_medium: params.get("utm_medium") || "",
-    utm_id: params.get("utm_id") || "",
-    utm_campaign: params.get("utm_campaign") || "",
-    utm_term: params.get("utm_term") || "",
-    utm_content: params.get("utm_content") || "",
-    utm_keyword: params.get("utm_keyword") || "",
-    utm_matchtype: params.get("utm_matchtype") || ""
-  };
+type FieldName = "name" | "company" | "email" | "phone";
+
+const FIELDS: {
+  name: FieldName;
+  label: string;
+  type: string;
+  autoComplete: string;
+  inputMode?: "text" | "email" | "tel";
+}[] = [
+  { name: "name", label: "Your Name", type: "text", autoComplete: "name" },
+  { name: "company", label: "Company Name", type: "text", autoComplete: "organization" },
+  { name: "email", label: "Work Email", type: "email", autoComplete: "email", inputMode: "email" },
+  { name: "phone", label: "Phone Number", type: "tel", autoComplete: "tel", inputMode: "tel" },
+];
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+const validate = (form: Record<FieldName, string>) => {
+  const errors: Partial<Record<FieldName, string>> = {};
+  if (!form.name.trim()) errors.name = "Tell us who to address the audit to.";
+  if (!form.company.trim()) errors.company = "We need your company to run the audit.";
+  if (!form.email.trim()) errors.email = "Enter your work email.";
+  else if (!EMAIL_PATTERN.test(form.email.trim())) errors.email = "That email doesn't look right.";
+  if (!form.phone.trim()) errors.phone = "Enter a phone number we can reach you on.";
+  return errors;
 };
 
-const CtaSection = () => {
-  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "" });
-  const [hiddenFields, setHiddenFields] = useState(getUtmParams);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+const inputClass =
+  "bg-foreground/[0.07] border rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors placeholder:text-foreground/35 w-full";
 
+const CtaSection = () => {
+  const [form, setForm] = useState<Record<FieldName, string>>({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+  });
+  const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
+  const [submitError, setSubmitError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const hiddenFields = useRef(getUtmParams());
+
+  // document.referrer and the query string are only available in the browser,
+  // so re-read once on mount rather than trusting the initial render pass.
   useEffect(() => {
-    setHiddenFields(getUtmParams());
+    hiddenFields.current = getUtmParams();
   }, []);
+
+  const setField = (name: FieldName, value: string) => {
+    setForm((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => (prev[name] ? { ...prev, [name]: undefined } : prev));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError("");
 
-    if (!form.name.trim() || !form.company.trim() || !form.email.trim() || !form.phone.trim()) {
-      toast.error("Please fill in all fields.");
+    const nextErrors = validate(form);
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      document.getElementById(Object.keys(nextErrors)[0])?.focus();
       return;
     }
 
     setIsSubmitting(true);
     try {
-      const { data, error } = await supabase.functions.invoke("submit-form", {
-        body: {
-          name: form.name.trim(),
-          company: form.company.trim(),
-          email: form.email.trim(),
-          phone: form.phone.trim(),
-          ...hiddenFields
-        }
+      await submitLead({
+        name: form.name.trim(),
+        company: form.company.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        ...hiddenFields.current,
       });
 
-      if (error) throw error;
-
-      setForm({ name: "", company: "", email: "", phone: "" });
       // Full page load (not SPA navigate) so GTM re-initializes and the
       // "Thank You page" PAGEVIEW trigger fires its conversion tags.
       window.location.assign("/thank-you");
-    } catch (err) {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
+    } catch {
+      setSubmitError("Something went wrong. Please try again, or email hello@estesmedia.com.");
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="cta" className="py-24 px-5 bg-gradient-to-br from-primary/[0.12] to-background relative overflow-hidden bg-grid bg-radial-glow mx-0 text-center md:px-[184px]">
+    <section
+      id="cta"
+      className="py-24 px-5 bg-gradient-to-br from-primary/[0.12] to-background relative overflow-hidden bg-grid bg-radial-glow mx-0 text-center md:px-[184px]"
+    >
       <img
         src={ctaMascot}
-        alt="Mascot"
-        className="absolute right-[5%] bottom-0 h-[300px] w-auto opacity-90 pointer-events-none drop-shadow-[0_0_40px_rgba(25,149,205,0.3)] hidden lg:block" />
-      
+        alt=""
+        aria-hidden="true"
+        width={620}
+        height={600}
+        loading="lazy"
+        decoding="async"
+        className="absolute right-[5%] bottom-0 h-[300px] w-auto opacity-90 pointer-events-none drop-shadow-[0_0_40px_rgba(25,149,205,0.3)] hidden lg:block"
+      />
+
       <div className="max-w-[640px] mx-auto relative z-10">
         <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-primary mb-3">Get Started Today</p>
         <h2 className="font-serif text-[clamp(32px,4vw,52px)] leading-[1.2] mb-5">
           Find Out If AI Search Is Costing You <em className="italic text-primary">Leads Right Now</em>
         </h2>
         <p className="text-[16px] text-foreground/70 leading-[1.7] mb-9">
-          Get a free AI Visibility Audit. We'll show you exactly where your company stands in ChatGPT, Perplexity, and Google AI — and what it's costing you in missed bids.
+          Get a free AI Visibility Audit. We'll show you exactly where your company stands in ChatGPT, Perplexity, and
+          Google AI — and what it's costing you in missed bids.
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-[440px] mx-auto mb-6">
-          {/* Hidden UTM fields */}
-          <input type="hidden" name="referer_url" value={hiddenFields.referer_url} />
-          <input type="hidden" name="utm_source" value={hiddenFields.utm_source} />
-          <input type="hidden" name="utm_medium" value={hiddenFields.utm_medium} />
-          <input type="hidden" name="utm_id" value={hiddenFields.utm_id} />
-          <input type="hidden" name="utm_campaign" value={hiddenFields.utm_campaign} />
-          <input type="hidden" name="utm_term" value={hiddenFields.utm_term} />
-          <input type="hidden" name="utm_content" value={hiddenFields.utm_content} />
-          <input type="hidden" name="utm_keyword" value={hiddenFields.utm_keyword} />
-          <input type="hidden" name="utm_matchtype" value={hiddenFields.utm_matchtype} />
 
-          <input
-            id="name"
-            autoComplete="name"
-            aria-label="Your Name"
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
-          
-          <input
-            id="company"
-            autoComplete="organization"
-            aria-label="Company Name"
-            type="text"
-            name="company"
-            placeholder="Company Name"
-            value={form.company}
-            onChange={(e) => setForm({ ...form, company: e.target.value })}
-            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
-          
-          <input
-            id="email"
-            autoComplete="email"
-            aria-label="Work Email"
-            type="email"
-            name="email"
-            placeholder="Work Email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
-          
-          <input
-            id="phone"
-            autoComplete="tel"
-            aria-label="Phone Number"
-            type="tel"
-            name="phone"
-            placeholder="Phone Number"
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className="bg-foreground/[0.07] border border-foreground/15 rounded px-[18px] py-3.5 text-foreground font-sans text-sm outline-none transition-colors focus:border-primary placeholder:text-foreground/35 w-full" />
-          
+        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3 max-w-[440px] mx-auto mb-6">
+          {FIELDS.map((field) => (
+            <div key={field.name} className="text-left">
+              <input
+                id={field.name}
+                name={field.name}
+                type={field.type}
+                inputMode={field.inputMode}
+                autoComplete={field.autoComplete}
+                aria-label={field.label}
+                aria-invalid={errors[field.name] ? true : undefined}
+                aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+                placeholder={field.label}
+                value={form[field.name]}
+                onChange={(e) => setField(field.name, e.target.value)}
+                className={`${inputClass} ${
+                  errors[field.name] ? "border-destructive" : "border-foreground/15 focus:border-primary"
+                }`}
+              />
+              {errors[field.name] && (
+                <p id={`${field.name}-error`} role="alert" className="text-[12px] text-destructive mt-1.5 px-1">
+                  {errors[field.name]}
+                </p>
+              )}
+            </div>
+          ))}
+
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-secondary text-secondary-foreground px-8 py-4 rounded text-[14px] font-extrabold tracking-[0.06em] uppercase hover:bg-secondary/85 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(230,105,2,0.4)] transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed">
-            
+            className="bg-secondary text-secondary-foreground px-8 py-4 rounded text-[14px] font-extrabold tracking-[0.06em] uppercase hover:bg-secondary/85 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(230,105,2,0.4)] transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             {isSubmitting ? "Submitting..." : "Get My Free AI Visibility Audit →"}
           </button>
+
+          {submitError && (
+            <p role="alert" className="text-[13px] text-destructive mt-1">
+              {submitError}
+            </p>
+          )}
         </form>
+
         <p className="text-[12px] text-foreground/40">No commitment. No BS. Just clarity on where you stand.</p>
       </div>
-    </section>);
-
+    </section>
+  );
 };
 
 export default CtaSection;

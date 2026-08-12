@@ -4,7 +4,7 @@ import geminiLogo from "@/assets/gemini-logo.webp";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen flex items-center relative overflow-hidden pt-[120px] pb-20 px-5 md:px-10 bg-gradient-to-br from-background via-[#0a1520] to-background bg-grid bg-radial-glow">
+    <section className="flex items-center relative overflow-hidden pt-[110px] pb-20 px-5 md:px-10 bg-gradient-to-br from-background via-[#0a1520] to-background bg-grid bg-radial-glow">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[60px] max-w-[1200px] mx-auto w-full items-center">
         {/* Left */}
         <div>
@@ -68,10 +68,34 @@ const HeroSection = () => {
         {/* Show Up Here logos - spans full width below both columns */}
         <div className="lg:col-span-2 flex flex-col items-center gap-8 mt-8">
           <p className="text-[26px] font-bold tracking-[0.15em] uppercase text-foreground/50">Show Up Here:</p>
-          <div className="flex items-center gap-16 flex-wrap justify-center">
-            <img fetchPriority="high" src={chatgptLogo} alt="ChatGPT" className="h-14 brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-            <img fetchPriority="high" src={geminiLogo} alt="Google Gemini" className="h-[73px] brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-            <img fetchPriority="high" src={claudeLogo} alt="Claude" className="h-[47px] brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+          <div className="flex items-center gap-10 md:gap-16 flex-wrap justify-center">
+            <img
+              src={chatgptLogo}
+              alt="ChatGPT"
+              width={400}
+              height={115}
+              loading="lazy"
+              decoding="async"
+              className="h-14 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+            />
+            <img
+              src={geminiLogo}
+              alt="Google Gemini"
+              width={280}
+              height={158}
+              loading="lazy"
+              decoding="async"
+              className="h-[73px] w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+            />
+            <img
+              src={claudeLogo}
+              alt="Claude"
+              width={380}
+              height={96}
+              loading="lazy"
+              decoding="async"
+              className="h-[47px] w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+            />
           </div>
         </div>
       </div>
